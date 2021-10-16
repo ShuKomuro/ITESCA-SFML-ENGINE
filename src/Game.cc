@@ -42,7 +42,7 @@ Game::Game()
   new sf::Vector2f(288, 288), b2BodyType::b2_staticBody, window, world);
 
   chest2 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
-  new sf::Vector2f(500, 600), b2BodyType::b2_dynamicBody, window, world);
+  new sf::Vector2f(448, 448), b2BodyType::b2_dynamicBody, window, world);
 
   walls = new DrawMap("assets/tilemap.png", window, 13, 9, sf::Vector2u(16, 16), wallsTiles);
   floorT = new DrawMap("assets/tilemap.png", window, 13, 9, sf::Vector2u(16, 16), floorTiles);
