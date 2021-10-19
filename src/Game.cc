@@ -15,7 +15,6 @@ const float playerSpeed{200.f};
 const float playerScale{4.f};
 const float boxScale{2.f};
 
-
 Character* character1{};
 GameObject* chest1{};
 GameObject* chest2{};
@@ -28,6 +27,7 @@ Game::Game()
 {
   window = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), G_NAME);
   event = new sf::Event();
+  
 
   //gravity = new b2Vec2(0.f, 9.8f);
   gravity = new b2Vec2(0.f, 0.f);
@@ -42,7 +42,7 @@ Game::Game()
   new sf::Vector2f(288, 288), b2BodyType::b2_staticBody, window, world);
 
   chest2 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
-  new sf::Vector2f(448, 448), b2BodyType::b2_dynamicBody, window, world);
+  new sf::Vector2f(448, 448), b2BodyType::b2_staticBody, window, world);
 
   walls = new DrawMap("assets/tilemap.png", window, 13, 9, sf::Vector2u(16, 16), wallsTiles);
   floorT = new DrawMap("assets/tilemap.png", window, 13, 9, sf::Vector2u(16, 16), floorTiles);
