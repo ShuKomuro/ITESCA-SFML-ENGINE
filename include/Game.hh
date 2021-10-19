@@ -3,6 +3,7 @@
 #include <box2d/box2d.h>
 #include "DrawPhysics.hh"
 #include "GameObject.hh"
+#include "DrawMap.hh"
 
 class Game
 {

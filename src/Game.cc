@@ -4,7 +4,7 @@
 #include "Character.hh"
 //#include "GameObject.hh"
 //#include"Boxes.hh"
-#include"DrawMap.hh"
+//#include"DrawMap.hh"
 #include<iostream>
 
 Collider* collider{new Collider(100, 100, 100, 100, sf::Color::Green, 5.f)};
@@ -50,8 +50,7 @@ Game::Game()
   gameObjects->push_back(character1);
   gameObjects->push_back(chest1);
   gameObjects->push_back(chest2);
-  //caja = new Boxes("assets/sprites.png", 6, 1, 16.f, 16.f, 
-  //playerScale, new sf::Vector2f(500, 500), window, world);
+
 }
 
 Game::~Game()
@@ -67,6 +66,7 @@ void Game::Draw()
 {
    window->draw(*floorT);
    window->draw(*walls);
+
   for(auto& gameObject : *gameObjects)
   {
     gameObject->Draw();
