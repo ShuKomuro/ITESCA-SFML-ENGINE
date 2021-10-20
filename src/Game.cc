@@ -6,6 +6,7 @@
 //#include"Boxes.hh"
 //#include"DrawMap.hh"
 #include<iostream>
+#include "TileGroup.hh"
 
 Collider* collider{new Collider(100, 100, 100, 100, sf::Color::Green, 5.f)};
 
@@ -20,8 +21,8 @@ GameObject* chest1{};
 GameObject* chest2{};
 DrawMap* walls{};
 DrawMap* floorT{};
-//Boxes* caja{};
 
+TileGroup* tileGroup{};
 
 Game::Game()
 {
@@ -42,7 +43,10 @@ Game::Game()
   new sf::Vector2f(288, 288), b2BodyType::b2_staticBody, window, world);
 
   chest2 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
-  new sf::Vector2f(448, 448), b2BodyType::b2_staticBody, window, world);
+  new sf::Vector2f(448, 448), b2BodyType::b2_dynamicBody, window, world);
+  //chest2->setRotation();
+
+  tileGroup = new TileGroup(window);
 
   walls = new DrawMap("assets/tilemap.png", window, 13, 9, sf::Vector2u(16, 16), wallsTiles);
   floorT = new DrawMap("assets/tilemap.png", window, 13, 9, sf::Vector2u(16, 16), floorTiles);
@@ -64,8 +68,9 @@ void Game::Inputs()
 
 void Game::Draw()
 {
-   window->draw(*floorT);
-   window->draw(*walls);
+   tileGroup->Draw();
+   //window->draw(*floorT);
+   //window->draw(*walls);
 
   for(auto& gameObject : *gameObjects)
   {
@@ -92,7 +97,6 @@ void Game::UpdatePhysics()
 {
   world->ClearForces();
   world->Step(deltaTime, 8, 8);
-  //std::cout << deltaTime << std::endl;
 }
 
 void Game::Update()

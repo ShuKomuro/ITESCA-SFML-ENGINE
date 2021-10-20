@@ -2,12 +2,12 @@
 
 #include "Rigidbody.hh"
 #include "SFML/Graphics.hpp"
+#include "Drawable.hh"
 
 class GameObject
 {
 protected:
-  sf::Texture* texture{};
-  sf::Sprite* sprite{};
+  Drawable* drawable{};
   Rigidbody* rigidbody{};
   sf::CircleShape* pivotPoint{};
   sf::RenderWindow* window{};
@@ -16,12 +16,11 @@ protected:
 
 public:
   GameObject(const char* textureUrl, int col, int row, float width, float height, float scale,
-  sf::Vector2f* position, b2BodyType bodyType, sf::RenderWindow*& window, b2World*& world);
+  sf::Vector2f* position, b2BodyType bodyType,sf::RenderWindow*& window, b2World*& world);
   ~GameObject();
 
   virtual void Update(float& deltaTime);
   virtual void Draw();
-
-
+  virtual void setRotation();
 };
 
