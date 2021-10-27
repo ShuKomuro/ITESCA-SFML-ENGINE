@@ -46,7 +46,7 @@ Game::Game()
   new sf::Vector2f(448, 448), b2BodyType::b2_dynamicBody, window, world);
   //chest2->setRotation();
 
-  tileGroup = new TileGroup(window);
+  tileGroup = new TileGroup(window, 10, 10, "assets/tile.png", "assets/maps/map1.tg", 16, 16, 4.f);
 
   walls = new DrawMap("assets/tilemap.png", window, 13, 9, sf::Vector2u(16, 16), wallsTiles);
   floorT = new DrawMap("assets/tilemap.png", window, 13, 9, sf::Vector2u(16, 16), floorTiles);
