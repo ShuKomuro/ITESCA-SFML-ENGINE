@@ -4,6 +4,7 @@
 #include "DrawPhysics.hh"
 #include "GameObject.hh"
 #include "DrawMap.hh"
+#include "ContactEventManager.hh"
 
 class Game
 {
@@ -13,6 +14,7 @@ private:
     b2Vec2 *gravity{};
     b2World *world{};
     b2Draw *drawPhysics{};
+    ContactEventManager* contactEventManager{};
     std::vector<GameObject *> *gameObjects;
 
 public:

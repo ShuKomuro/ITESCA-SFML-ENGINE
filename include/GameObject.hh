@@ -13,14 +13,15 @@ protected:
   sf::RenderWindow* window{};
   b2World* world{};
   float scale{};
-
+  const char* tagName{};
 public:
   GameObject(const char* textureUrl, int col, int row, float width, float height, float scale,
   sf::Vector2f* position, b2BodyType bodyType,sf::RenderWindow*& window, b2World*& world);
   ~GameObject();
 
+  const char* GetTagName() const;
+  void SetTagName(const char* tagName);
+
   virtual void Update(float& deltaTime);
   virtual void Draw();
-  virtual void setRotation();
 };
-

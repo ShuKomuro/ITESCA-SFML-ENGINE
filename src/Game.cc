@@ -34,17 +34,21 @@ Game::Game()
   gravity = new b2Vec2(0.f, 0.f);
   world = new b2World(*gravity);
   drawPhysics = new DrawPhysics(window);
+  contactEventManager = new ContactEventManager();
   gameObjects = new std::vector<GameObject*>;
 
   character1 = new Character("assets/sprites.png", 0, 5, 16.f, 16.f, 
   playerScale, playerSpeed, new sf::Vector2f(100, 100), window, world);
+
+  character1->SetTagName("Player");
   
   chest1 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
   new sf::Vector2f(288, 288), b2BodyType::b2_staticBody, window, world);
+  chest1->SetTagName("chest");
 
   chest2 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
   new sf::Vector2f(448, 448), b2BodyType::b2_dynamicBody, window, world);
-  //chest2->setRotation();
+  chest2->SetTagName("dynamic chest");
 
   tileGroup = new TileGroup(window, 10, 10, "assets/tile.png", "assets/maps/map1.tg", 16, 16, 4.f);
 
@@ -89,6 +93,7 @@ void Game::Init()
 {
   world->SetDebugDraw(drawPhysics);
   drawPhysics->SetFlags(b2Draw::e_shapeBit);
+  world->SetContactListener(contactEventManager);
 
   Update();
 }
