@@ -2,11 +2,13 @@
 #include "constance.hh"
 #include "Collider.hh"
 #include "Character.hh"
+//#include "Projectile.hh"
 //#include "GameObject.hh"
 //#include"Boxes.hh"
 //#include"DrawMap.hh"
 #include<iostream>
 #include "TileGroup.hh"
+#include "InputsSystem.hh"
 
 Collider* collider{new Collider(100, 100, 100, 100, sf::Color::Green, 5.f)};
 
@@ -19,6 +21,7 @@ const float boxScale{2.f};
 Character* character1{};
 GameObject* chest1{};
 GameObject* chest2{};
+GameObject* projectile{};
 DrawMap* walls{};
 DrawMap* floorT{};
 
@@ -36,6 +39,7 @@ Game::Game()
   drawPhysics = new DrawPhysics(window);
   contactEventManager = new ContactEventManager();
   gameObjects = new std::vector<GameObject*>;
+  //bullets = new std::vector<GameObject*>;
 
   character1 = new Character("assets/sprites.png", 0, 5, 16.f, 16.f, 
   playerScale, playerSpeed, new sf::Vector2f(100, 100), window, world);
@@ -49,6 +53,10 @@ Game::Game()
   chest2 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
   new sf::Vector2f(448, 448), b2BodyType::b2_dynamicBody, window, world);
   chest2->SetTagName("dynamic chest");
+
+  /*projectile = new Projectile("assets/BulletSprites.png", 0, 8, 8, 8, playerScale,
+  new sf::Vector2f(448, 448), b2BodyType::b2_staticBody, window, world, character1);
+  projectile->SetTagName("projectile");*/
 
   tileGroup = new TileGroup(window, 10, 10, "assets/tile.png", "assets/maps/map1.tg", 16, 16, 4.f);
 
@@ -72,14 +80,21 @@ void Game::Inputs()
 
 void Game::Draw()
 {
-   tileGroup->Draw();
-   //window->draw(*floorT);
-   //window->draw(*walls);
+   //tileGroup->Draw();
+   window->draw(*floorT);
+   window->draw(*walls);
 
   for(auto& gameObject : *gameObjects)
   {
     gameObject->Draw();
   }
+
+  /*if(InputsSystem::isPressed()){
+    for(auto& gameObject : *bullets)
+   {
+      gameObject->Draw();
+    }
+  }*/
   world->DebugDraw();
 }
 
@@ -120,7 +135,9 @@ void Game::Update()
 
     UpdatePhysics();
 
-    Inputs();
+    /*if(InputsSystem::isPressed()){
+      bullets->push_back(projectile);
+    }*/
 
     for(auto& gameObject : *gameObjects)
   {

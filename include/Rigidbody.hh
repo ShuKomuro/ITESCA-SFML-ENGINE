@@ -1,6 +1,7 @@
 #pragma once
 #include<box2d/box2d.h>
 #include "SFML/Graphics.hpp"
+#include <iostream>
 
 class Rigidbody
 {
@@ -19,6 +20,7 @@ public:
 
   b2Body* GetBody() const;
   sf::Vector2f GetPositionSFML() const;
+  b2Vec2 GetPosition() const;
   void Move(b2Vec2 direction);
   void SetRotationFreeze(bool freezeRotation);
 };

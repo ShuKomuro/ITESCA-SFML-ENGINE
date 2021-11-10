@@ -1,7 +1,7 @@
 #pragma once
 
 #include<SFML/Graphics.hpp>
-#include "Rigidbody.hh"
+//#include "Rigidbody.hh"
 #include "GameObject.hh"
 
 class Character : public GameObject

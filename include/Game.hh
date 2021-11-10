@@ -3,6 +3,7 @@
 #include <box2d/box2d.h>
 #include "DrawPhysics.hh"
 #include "GameObject.hh"
+//#include "Projectile.hh"
 #include "DrawMap.hh"
 #include "ContactEventManager.hh"
 
@@ -16,6 +17,7 @@ private:
     b2Draw *drawPhysics{};
     ContactEventManager* contactEventManager{};
     std::vector<GameObject *> *gameObjects;
+    //std::vector<GameObject *> *bullets;
 
 public:
     Game();

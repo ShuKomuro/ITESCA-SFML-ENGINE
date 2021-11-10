@@ -30,6 +30,14 @@ struct InputsSystem
         return axis;
     }
 
+    static bool isPressed(){
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     static sf::Vector2f GetAxisJoystick(){
          sf::Vector2f axis{};
 

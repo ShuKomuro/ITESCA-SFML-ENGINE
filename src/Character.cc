@@ -55,6 +55,7 @@ void Character::Move()
   rigidbody->Move(b2Vec2(InputsSystem::GetAxis().x * moveSpeed, InputsSystem::GetAxis().y * moveSpeed));
 }
 
+
 sf::Sprite* Character::GetSprite() const
 {
   return drawable->GetSprite();

@@ -8,13 +8,14 @@ class GameObject
 {
 protected:
   Drawable* drawable{};
-  Rigidbody* rigidbody{};
+  
   sf::CircleShape* pivotPoint{};
   sf::RenderWindow* window{};
   b2World* world{};
   float scale{};
   const char* tagName{};
 public:
+  Rigidbody* rigidbody{};
   GameObject(const char* textureUrl, int col, int row, float width, float height, float scale,
   sf::Vector2f* position, b2BodyType bodyType,sf::RenderWindow*& window, b2World*& world);
   ~GameObject();
