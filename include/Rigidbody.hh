@@ -23,4 +23,5 @@ public:
   b2Vec2 GetPosition() const;
   void Move(b2Vec2 direction);
   void SetRotationFreeze(bool freezeRotation);
+  void SetSensor();
 };

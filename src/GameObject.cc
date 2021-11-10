@@ -39,3 +39,8 @@ void GameObject::SetTagName(const char* tagName)
 {
   this->tagName = tagName;
 }
+
+sf::Vector2f GameObject::GetPosition()
+{
+  return rigidbody->GetPositionSFML();
+}

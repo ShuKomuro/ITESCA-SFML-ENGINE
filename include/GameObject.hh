@@ -25,4 +25,6 @@ public:
 
   virtual void Update(float& deltaTime);
   virtual void Draw();
+
+  sf::Vector2f GetPosition();
 };

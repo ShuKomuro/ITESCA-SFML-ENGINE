@@ -95,7 +95,7 @@ void Game::Draw()
       gameObject->Draw();
     }
   }*/
-  world->DebugDraw();
+  //world->DebugDraw();
 }
 
 void Game::Render()
@@ -140,9 +140,9 @@ void Game::Update()
     }*/
 
     for(auto& gameObject : *gameObjects)
-  {
-    gameObject->Update(deltaTime);
-  }
+    {
+      gameObject->Update(deltaTime);
+    }
 
     Render();
   }

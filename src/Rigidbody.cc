@@ -51,3 +51,8 @@ void Rigidbody::SetRotationFreeze(bool freezeRotation)
 {
   body->SetFixedRotation(freezeRotation);
 }
+
+void Rigidbody::SetSensor()
+{
+  fixture->SetSensor(true);
+}

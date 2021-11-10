@@ -2,6 +2,8 @@
 #include "InputsSystem.hh"
 #include "Animation.hh"
 
+#include "Bullet.hh"
+
 Animation* idleAnimation{new Animation()};
 Animation* runAnimation{new Animation()};
 
@@ -10,6 +12,8 @@ sf::Vector2f* position, sf::RenderWindow*& window, b2World*& world) :
 GameObject(textureUrl, col, row, width, height, scale, position, b2BodyType::b2_dynamicBody, window, world)
 {
   this->moveSpeed = moveSpeed;
+  this->bullets = new std::vector<GameObject*>();
+  this->position = position;
 
   rigidbody->SetRotationFreeze(true);
 
@@ -24,11 +28,20 @@ Character::~Character()
 void Character::Draw()
 {
   GameObject::Draw();
+  for(auto& bullet : *bullets)
+  {
+    bullet->Draw();
+  }
 }
 
 void Character::Update(float& deltaTime)
 {
   GameObject::Update(deltaTime);
+
+  for(auto& bullet : *bullets)
+  {
+    bullet->Update(deltaTime);
+  }
 
   FlipSprite();
   Move();
@@ -40,6 +53,20 @@ void Character::Update(float& deltaTime)
   else
   {
     idleAnimation->Play(deltaTime);
+  }
+  if(InputsSystem::GetAxis().x != 0.f || InputsSystem::GetAxis().y != 0.f)
+  {
+    lastAxis = InputsSystem::GetAxis();
+  }
+  if(InputsSystem::isPressed() && isShooting == false)
+  {
+    isShooting = true;
+    std::cout << "create bullets" << std::endl;
+    CreateBullet();
+  }
+  else
+  {
+    isShooting = false;
   }
 }
 
@@ -60,3 +87,10 @@ sf::Sprite* Character::GetSprite() const
 {
   return drawable->GetSprite();
 }
+
+void Character::CreateBullet()
+{
+  bullets->push_back(new Bullet("assets/BulletSprites.png", 0, 8, 8.f, 8.f, 4.f, 500.f, new sf::Vector2f(GetPosition()), 
+  window, world, b2Vec2(lastAxis.x, lastAxis.y)));
+}
+

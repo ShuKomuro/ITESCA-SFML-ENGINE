@@ -4,41 +4,40 @@
 
 struct InputsSystem
 {
-    
-    
-    static sf::Vector2f GetAxis(){
-        
+
+
+    static sf::Vector2f GetAxis()
+    {
+
         sf::Vector2f axis{};
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) | 
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) |
         sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-            axis.x=1;    
+            axis.x=1;
         }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) | 
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) |
         sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
-            axis.x=-1;    
+            axis.x=-1;
         }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) | 
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) |
         sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
-            axis.y=-1;    
+            axis.y=-1;
         }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) | 
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) |
         sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-            axis.y=1;    
+            axis.y=1;
         }
 
         return axis;
     }
 
-    static bool isPressed(){
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-            return true;
-        }else{
-            return false;
-        }
+    static bool isPressed()
+    {
+        return sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
     }
 
-    static sf::Vector2f GetAxisJoystick(){
+    static sf::Vector2f GetAxisJoystick()
+    {
          sf::Vector2f axis{};
 
         float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
@@ -61,9 +60,7 @@ struct InputsSystem
         //std::cout << "AXIS EN X: " << x <<std:: endl;
         //std::cout << "AXIS EN Y: " << y;
         //if(sf::Joystick::
-        
-         
+
         return axis;
     }
-    
 };
