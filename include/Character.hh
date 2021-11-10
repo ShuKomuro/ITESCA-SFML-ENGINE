@@ -25,6 +25,7 @@ public:
   void Draw() override;
 
   void CreateBullet();
+  void DeleteBullet();
 
   sf::Sprite* GetSprite() const;
 };

@@ -37,11 +37,6 @@ sf::Vector2f Rigidbody::GetPositionSFML() const
   return sf::Vector2f(body->GetPosition().x, body->GetPosition().y);
 }
 
-b2Vec2 Rigidbody::GetPosition() const
-{
-  return body->GetPosition();
-}
-
 void Rigidbody::Move(b2Vec2 direction)
 {
     body->SetLinearVelocity(direction);

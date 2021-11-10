@@ -2,10 +2,6 @@
 #include "constance.hh"
 #include "Collider.hh"
 #include "Character.hh"
-//#include "Projectile.hh"
-//#include "GameObject.hh"
-//#include"Boxes.hh"
-//#include"DrawMap.hh"
 #include<iostream>
 #include "TileGroup.hh"
 #include "InputsSystem.hh"
@@ -39,7 +35,6 @@ Game::Game()
   drawPhysics = new DrawPhysics(window);
   contactEventManager = new ContactEventManager();
   gameObjects = new std::vector<GameObject*>;
-  //bullets = new std::vector<GameObject*>;
 
   character1 = new Character("assets/sprites.png", 0, 5, 16.f, 16.f, 
   playerScale, playerSpeed, new sf::Vector2f(100, 100), window, world);
@@ -53,10 +48,6 @@ Game::Game()
   chest2 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
   new sf::Vector2f(448, 448), b2BodyType::b2_dynamicBody, window, world);
   chest2->SetTagName("dynamic chest");
-
-  /*projectile = new Projectile("assets/BulletSprites.png", 0, 8, 8, 8, playerScale,
-  new sf::Vector2f(448, 448), b2BodyType::b2_staticBody, window, world, character1);
-  projectile->SetTagName("projectile");*/
 
   tileGroup = new TileGroup(window, 10, 10, "assets/tile.png", "assets/maps/map1.tg", 16, 16, 4.f);
 
@@ -88,14 +79,7 @@ void Game::Draw()
   {
     gameObject->Draw();
   }
-
-  /*if(InputsSystem::isPressed()){
-    for(auto& gameObject : *bullets)
-   {
-      gameObject->Draw();
-    }
-  }*/
-  //world->DebugDraw();
+  world->DebugDraw();
 }
 
 void Game::Render()
@@ -134,10 +118,6 @@ void Game::Update()
     timer->restart();
 
     UpdatePhysics();
-
-    /*if(InputsSystem::isPressed()){
-      bullets->push_back(projectile);
-    }*/
 
     for(auto& gameObject : *gameObjects)
     {

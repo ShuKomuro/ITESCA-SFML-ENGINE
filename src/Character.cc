@@ -58,15 +58,23 @@ void Character::Update(float& deltaTime)
   {
     lastAxis = InputsSystem::GetAxis();
   }
-  if(InputsSystem::isPressed() && isShooting == false)
+  if(InputsSystem::isPressed())
   {
-    isShooting = true;
-    std::cout << "create bullets" << std::endl;
-    CreateBullet();
+    if(isShooting==false){
+      isShooting = true;
+      std::cout << "create bullets" << std::endl;
+      CreateBullet();
+    }
   }
   else
   {
+    //std::cout << "not create bullets" << std::endl;
     isShooting = false;
+  }
+
+  if(bullets->size()!=0){
+    //std::cout << "posaber bullets" << std::endl;
+    DeleteBullet();
   }
 }
 
@@ -90,7 +98,34 @@ sf::Sprite* Character::GetSprite() const
 
 void Character::CreateBullet()
 {
-  bullets->push_back(new Bullet("assets/BulletSprites.png", 0, 8, 8.f, 8.f, 4.f, 500.f, new sf::Vector2f(GetPosition()), 
-  window, world, b2Vec2(lastAxis.x, lastAxis.y)));
+  Bullet* b = new Bullet("assets/BulletSprites.png", 0, 8, 8.f, 8.f, 4.f, 500.f, new sf::Vector2f(GetPosition()), 
+  window, world, b2Vec2(lastAxis.x, lastAxis.y));
+  b->SetTagName("Bullet");
+  bullets->push_back(b);
+}
+
+void Character::DeleteBullet()
+{
+  GameObject* b{};
+  std::vector<GameObject*>* bullet2 = new std::vector<GameObject*>();
+  for(auto& bullet : *bullets)
+  {
+    if(bullet->GetPosition().y <= 50){
+      std::cout << "shi" << std::endl;
+      bullet2->push_back(bullet);
+    }
+  }
+
+  
+  if(bullet2->size()!=0){
+    std::cout << "delete a bullet" << std::endl;
+    delete bullet2;
+    /*for(auto& bullet : *bullet2)
+    {
+      delete bullet;
+      std::cout << "delete a bullet" << std::endl;
+    }*/
+  }
+  
 }
 
