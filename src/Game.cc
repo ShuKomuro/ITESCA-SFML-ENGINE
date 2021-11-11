@@ -42,7 +42,7 @@ Game::Game()
   character1->SetTagName("Player");
   
   chest1 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
-  new sf::Vector2f(288, 288), b2BodyType::b2_staticBody, window, world);
+  new sf::Vector2f(350, 350), b2BodyType::b2_staticBody, window, world);
   chest1->SetTagName("chest");
 
   chest2 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,

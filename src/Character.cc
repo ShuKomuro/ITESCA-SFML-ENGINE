@@ -37,13 +37,10 @@ void Character::Draw()
 
 void Character::Update(float& deltaTime)
 {
-
-  //std::cout << "AWEBO entra en el update" << std::endl;
   GameObject::Update(deltaTime);
 
   for(auto& bullet : *bullets)
   {
-    std::cout << "c imprime algo" << std::endl;
     bullet->Update(deltaTime);
   }
 
@@ -111,7 +108,7 @@ void Character::CreateBullet()
 
 void Character::DeleteBullet()
 {
-  //std::cout << "entra" << std::endl;
+  //std::cout << "entra" << std::endl;sdd
   std::vector<GameObject*>* bullet2 = new std::vector<GameObject*>();
   std::stack<int>* aber = new std::stack<int>();
   aber = {};
@@ -119,20 +116,14 @@ void Character::DeleteBullet()
   int size = bullets->size();
 
   for( int i = 0; i < size; i++ ){
-    if (bullets->at(i)->GetPosition().y <=50){
+    if (bullets->at(i)->GetPosition().y <=50 || bullets->at(i)->GetPosition().y >= 550
+      ||  bullets->at(i)->GetPosition().x <= 50 || bullets->at(i)->GetPosition().x >= 782 ){
       world->DestroyBody(bullets->at(i)->rigidbody->GetBody());
       //bullets->at(i)->rigidbody->EraseBody();
-      bullets->pop_back();
-
-
-      //std::cout << " pop" << std::endl;
-      //break;d
-      //aber->push(i);
+      bullets->erase(bullets->begin());
+      //bullets->pop_back();
+      break;
     }
   }
-  
-
-  std::cout << " sale del delete" << std::endl;
-  
 }
-
+ 
