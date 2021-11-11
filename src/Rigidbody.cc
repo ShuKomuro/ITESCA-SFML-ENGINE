@@ -51,3 +51,7 @@ void Rigidbody::SetSensor()
 {
   fixture->SetSensor(true);
 }
+
+void Rigidbody::EraseBody(){
+  world->DestroyBody(body);
+}

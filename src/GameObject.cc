@@ -44,3 +44,7 @@ sf::Vector2f GameObject::GetPosition()
 {
   return rigidbody->GetPositionSFML();
 }
+
+void GameObject::Kill(){
+  delete this;
+}

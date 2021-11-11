@@ -27,4 +27,5 @@ public:
   virtual void Draw();
 
   sf::Vector2f GetPosition();
+  void Kill();
 };

@@ -1,7 +1,8 @@
 #include "Character.hh"
 #include "InputsSystem.hh"
 #include "Animation.hh"
-
+#include <stack>
+#include <iostream>
 #include "Bullet.hh"
 
 Animation* idleAnimation{new Animation()};
@@ -36,10 +37,13 @@ void Character::Draw()
 
 void Character::Update(float& deltaTime)
 {
+
+  //std::cout << "AWEBO entra en el update" << std::endl;
   GameObject::Update(deltaTime);
 
   for(auto& bullet : *bullets)
   {
+    std::cout << "c imprime algo" << std::endl;
     bullet->Update(deltaTime);
   }
 
@@ -76,6 +80,7 @@ void Character::Update(float& deltaTime)
     //std::cout << "posaber bullets" << std::endl;
     DeleteBullet();
   }
+
 }
 
 void Character::FlipSprite()
@@ -106,26 +111,28 @@ void Character::CreateBullet()
 
 void Character::DeleteBullet()
 {
-  GameObject* b{};
+  //std::cout << "entra" << std::endl;
   std::vector<GameObject*>* bullet2 = new std::vector<GameObject*>();
-  for(auto& bullet : *bullets)
-  {
-    if(bullet->GetPosition().y <= 50){
-      std::cout << "shi" << std::endl;
-      bullet2->push_back(bullet);
+  std::stack<int>* aber = new std::stack<int>();
+  aber = {};
+
+  int size = bullets->size();
+
+  for( int i = 0; i < size; i++ ){
+    if (bullets->at(i)->GetPosition().y <=50){
+      world->DestroyBody(bullets->at(i)->rigidbody->GetBody());
+      //bullets->at(i)->rigidbody->EraseBody();
+      bullets->pop_back();
+
+
+      //std::cout << " pop" << std::endl;
+      //break;d
+      //aber->push(i);
     }
   }
-
   
-  if(bullet2->size()!=0){
-    std::cout << "delete a bullet" << std::endl;
-    delete bullet2;
-    /*for(auto& bullet : *bullet2)
-    {
-      delete bullet;
-      std::cout << "delete a bullet" << std::endl;
-    }*/
-  }
+
+  std::cout << " sale del delete" << std::endl;
   
 }
 
