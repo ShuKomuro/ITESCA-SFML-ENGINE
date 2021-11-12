@@ -17,8 +17,10 @@ void ContactEventManager::BeginContact(b2Contact *contact)
 
   if(actorA && actorB)
   {
-    std::cout << "c " << actorA->GetTagName() << ", " << actorB->GetTagName() << std::endl;
-    std::cout << "collision: " << actorA->GetTagName() << ", " << actorB->GetTagName() << std::endl;
+    if(actorA->GetTagName() != "Player" && actorB->GetTagName() != "Bullet"){
+      std::cout << "c " << actorA->GetTagName() << ", " << actorB->GetTagName() << std::endl;
+      std::cout << "collision: " << actorA->GetTagName() << ", " << actorB->GetTagName() << std::endl;
+    }
   }
 }
 void ContactEventManager::EndContact(b2Contact *contact)

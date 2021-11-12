@@ -5,6 +5,7 @@
 #include<iostream>
 #include "TileGroup.hh"
 #include "InputsSystem.hh"
+#include "Enemy.hh"
 
 Collider* collider{new Collider(100, 100, 100, 100, sf::Color::Green, 5.f)};
 
@@ -17,9 +18,10 @@ const float boxScale{2.f};
 Character* character1{};
 GameObject* chest1{};
 GameObject* chest2{};
-GameObject* projectile{};
+Enemy* enemy1{};
 DrawMap* walls{};
 DrawMap* floorT{};
+sf::View* view; 
 
 TileGroup* tileGroup{};
 
@@ -27,9 +29,12 @@ Game::Game()
 {
   window = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), G_NAME);
   event = new sf::Event();
-  
+
 
   //gravity = new b2Vec2(0.f, 9.8f);
+  view = new sf::View(sf::FloatRect(0.f, 0.f, (float)WINDOW_WIDTH, (float) WINDOW_HEIGHT));
+  
+  //view->reset(sf::FloatRect(0.f,0.f, (float)WINDOW_WIDTH);
   gravity = new b2Vec2(0.f, 0.f);
   world = new b2World(*gravity);
   drawPhysics = new DrawPhysics(window);
@@ -40,6 +45,8 @@ Game::Game()
   playerScale, playerSpeed, new sf::Vector2f(100, 100), window, world);
 
   character1->SetTagName("Player");
+
+  view->setCenter(character1->GetPosition());
   
   chest1 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
   new sf::Vector2f(350, 350), b2BodyType::b2_staticBody, window, world);
@@ -49,7 +56,11 @@ Game::Game()
   new sf::Vector2f(448, 448), b2BodyType::b2_dynamicBody, window, world);
   chest2->SetTagName("dynamic chest");
 
-  tileGroup = new TileGroup(window, 10, 10, "assets/tile.png", "assets/maps/map1.tg", 16, 16, 4.f);
+  enemy1 = new Enemy( "assets/sprites.png", 0, 1, 16, 16, playerScale,
+  new sf::Vector2f(600, 500), b2BodyType::b2_dynamicBody, window, world, playerSpeed);
+  enemy1->SetTagName("Enemy");
+
+  //tileGroup = new TileGroup(window, 10, 10, "assets/tile.png", "assets/maps/map1.tg", 16, 16, 4.f);
 
   walls = new DrawMap("assets/tilemap.png", window, 13, 9, sf::Vector2u(16, 16), wallsTiles);
   floorT = new DrawMap("assets/tilemap.png", window, 13, 9, sf::Vector2u(16, 16), floorTiles);
@@ -57,6 +68,9 @@ Game::Game()
   gameObjects->push_back(character1);
   gameObjects->push_back(chest1);
   gameObjects->push_back(chest2);
+  gameObjects->push_back(enemy1);
+
+  
 
 }
 

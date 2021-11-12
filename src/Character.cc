@@ -100,7 +100,7 @@ sf::Sprite* Character::GetSprite() const
 
 void Character::CreateBullet()
 {
-  Bullet* b = new Bullet("assets/BulletSprites.png", 0, 8, 8.f, 8.f, 4.f, 500.f, new sf::Vector2f(GetPosition()), 
+  Bullet* b = new Bullet("assets/BulletSprites.png", 0, 12, 8.f, 8.f, 4.f, 500.f, new sf::Vector2f(GetPosition()), 
   window, world, b2Vec2(lastAxis.x, lastAxis.y));
   b->SetTagName("Bullet");
   bullets->push_back(b);
