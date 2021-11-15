@@ -3,6 +3,11 @@
 const int WINDOW_WIDTH{832}; //800
 const int WINDOW_HEIGHT{600};
 const char* G_NAME{"YEAH PERDONE"};
+const float playerSpeed{200.f};
+const float playerScale{4.f};
+const float boxScale{2.f};
+const float enemySpeed{50.f};
+
 const int wallsTiles[] =
     {
         55, 56, 56, 56, 56, 56, 56, 56, 59, 60, 60, 60, 60, 

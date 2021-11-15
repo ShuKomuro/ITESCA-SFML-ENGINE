@@ -11,9 +11,6 @@ Collider* collider{new Collider(100, 100, 100, 100, sf::Color::Green, 5.f)};
 
 sf::Clock* timer{new sf::Clock()};
 float deltaTime{};
-const float playerSpeed{200.f};
-const float playerScale{4.f};
-const float boxScale{2.f};
 
 Character* character1{};
 GameObject* chest1{};
@@ -56,8 +53,8 @@ Game::Game()
   new sf::Vector2f(448, 448), b2BodyType::b2_dynamicBody, window, world);
   chest2->SetTagName("dynamic chest");
 
-  enemy1 = new Enemy( "assets/sprites.png", 0, 1, 16, 16, playerScale,
-  new sf::Vector2f(600, 500), b2BodyType::b2_dynamicBody, window, world, playerSpeed);
+  enemy1 = new Enemy( "assets/sprites.png", 0, 2, 16, 16, playerScale,
+  new sf::Vector2f(600, 500), window, world, enemySpeed);
   enemy1->SetTagName("Enemy");
 
   //tileGroup = new TileGroup(window, 10, 10, "assets/tile.png", "assets/maps/map1.tg", 16, 16, 4.f);
@@ -69,8 +66,6 @@ Game::Game()
   gameObjects->push_back(chest1);
   gameObjects->push_back(chest2);
   gameObjects->push_back(enemy1);
-
-  
 
 }
 

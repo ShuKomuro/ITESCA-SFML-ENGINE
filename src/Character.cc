@@ -121,6 +121,7 @@ void Character::DeleteBullet()
       world->DestroyBody(bullets->at(i)->rigidbody->GetBody());
       //bullets->at(i)->rigidbody->EraseBody();
       bullets->erase(bullets->begin());
+      //delete bullets->at(i); 
       //bullets->pop_back();
       break;
     }

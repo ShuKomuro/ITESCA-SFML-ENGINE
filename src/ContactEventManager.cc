@@ -25,10 +25,15 @@ void ContactEventManager::BeginContact(b2Contact *contact)
       std::cout << "c " << actorA->GetTagName() << ", " << actorB->GetTagName() << std::endl;
       std::cout << "collision: " << actorA->GetTagName() << ", " << actorB->GetTagName() << std::endl;
     }
+
+    if(a == "Player" && b == "Enemy"){
+      std::cout << "c " << actorA->GetTagName() << ", " << actorB->GetTagName() << std::endl;
+      std::cout << "* c muere * xd" << std::endl;
+    }
     
   }
 }
 void ContactEventManager::EndContact(b2Contact *contact)
 {
-  std::cout << "mmm patas" << std::endl;
+
 }

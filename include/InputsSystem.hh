@@ -63,4 +63,11 @@ struct InputsSystem
 
         return axis;
     }
+
+    static sf::Vector2f autoMoving(){
+        sf::Vector2f axis{};
+        axis.x = -1;
+        axis.y = 0;
+        return axis;
+    }
 };
