@@ -35,8 +35,10 @@ Game::Game()
   gravity = new b2Vec2(0.f, 0.f);
   world = new b2World(*gravity);
   drawPhysics = new DrawPhysics(window);
+  enemies = new std::vector<Enemy*>;
   contactEventManager = new ContactEventManager();
   gameObjects = new std::vector<GameObject*>;
+  
 
   character1 = new Character("assets/sprites.png", 0, 5, 16.f, 16.f, 
   playerScale, playerSpeed, new sf::Vector2f(100, 100), window, world);
@@ -65,7 +67,7 @@ Game::Game()
   gameObjects->push_back(character1);
   gameObjects->push_back(chest1);
   gameObjects->push_back(chest2);
-  gameObjects->push_back(enemy1);
+  enemies->push_back(enemy1);
 
 }
 
@@ -87,6 +89,11 @@ void Game::Draw()
   for(auto& gameObject : *gameObjects)
   {
     gameObject->Draw();
+  }
+
+  for(auto& enemys : *enemies)
+  {
+    enemys->Draw();
   }
   world->DebugDraw();
 }
@@ -131,6 +138,11 @@ void Game::Update()
     for(auto& gameObject : *gameObjects)
     {
       gameObject->Update(deltaTime);
+    }
+
+    for(auto& enemys : *enemies)
+    {
+      enemys->Update(deltaTime);
     }
 
     Render();
