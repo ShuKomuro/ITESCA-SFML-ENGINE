@@ -134,7 +134,7 @@ void Game::Update()
     timer->restart();
 
     UpdatePhysics();
-
+    
     for(auto& gameObject : *gameObjects)
     {
       gameObject->Update(deltaTime);
