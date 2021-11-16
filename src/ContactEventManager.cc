@@ -5,6 +5,7 @@
 
 ContactEventManager::ContactEventManager()
 {
+  //this->enemies = enemies;
 }
 
 ContactEventManager::~ContactEventManager()
@@ -34,7 +35,9 @@ void ContactEventManager::BeginContact(b2Contact *contact)
     if(a == "Enemy" && b == "Bullet"){
       std::cout << "c " << actorA->GetTagName() << ", " << actorB->GetTagName() << std::endl;
       std::cout << "* LE DA LA BALA * xd" << std::endl;
-      //delete actorA;
+      //enemies.erase(&actorA);
+      //world->DestroyBody(contact->GetFixtureA()->GetBody());
+      
     }
     
   }
@@ -42,4 +45,8 @@ void ContactEventManager::BeginContact(b2Contact *contact)
 void ContactEventManager::EndContact(b2Contact *contact)
 {
 
+}
+
+void ContactEventManager::setWolrd(b2World*& wolrd){
+  this->world = world;
 }

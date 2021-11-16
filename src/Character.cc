@@ -63,7 +63,7 @@ void Character::Update(float& deltaTime)
   {
     if(isShooting==false){
       isShooting = true;
-      std::cout << "create bullets" << std::endl;
+      //std::cout << "create bullets" << std::endl;
       CreateBullet();
     }
   }

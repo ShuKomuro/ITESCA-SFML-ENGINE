@@ -37,6 +37,7 @@ Game::Game()
   drawPhysics = new DrawPhysics(window);
   enemies = new std::vector<Enemy*>;
   contactEventManager = new ContactEventManager();
+  
   gameObjects = new std::vector<GameObject*>;
   
 
@@ -108,8 +109,9 @@ void Game::Init()
 {
   world->SetDebugDraw(drawPhysics);
   drawPhysics->SetFlags(b2Draw::e_shapeBit);
+  contactEventManager->setWolrd(world);
   world->SetContactListener(contactEventManager);
-
+  
   Update();
 }
 
