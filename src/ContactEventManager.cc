@@ -28,12 +28,12 @@ void ContactEventManager::BeginContact(b2Contact *contact)
 
     if(a == "Player" && b == "Enemy"){
       std::cout << "c " << actorA->GetTagName() << ", " << actorB->GetTagName() << std::endl;
-      std::cout << "* c muere * xd" << std::endl;
+      //std::cout << "* c muere * xd" << std::endl;
     }
 
-    if(a == "Enemy" && b == "Bullet"){
-      std::cout << "c " << actorA->GetTagName() << ", " << actorB->GetTagName() << std::endl;
-      std::cout << "* LE DA LA BALA * xd" << std::endl;
+    if((a == "Enemy" && b == "Bullet") || (a == "Wall" && b == "Bullet")){
+       
+      //std::cout << "* LE DA LA BALA * xd" << std::endl;
       //enemies.erase(&actorA);
       //world->DestroyBody(contact->GetFixtureA()->GetBody());
       deleteList->push_back(actorB);
@@ -46,7 +46,3 @@ void ContactEventManager::EndContact(b2Contact *contact)
 {
 
 }
-
-/*void ContactEventManager::setWolrd(b2World*& wolrd){
-  this->world = world;
-}*/

@@ -33,7 +33,7 @@ void Enemy::Update(float& deltaTime){
 
 void Enemy::autoMove(int &x, int &dx){
     x += dx;
-    if(x <= -2000 || x >= 2000){
+    if(x == -1500 || x == 1500){
         dx *= -1;
     }
     

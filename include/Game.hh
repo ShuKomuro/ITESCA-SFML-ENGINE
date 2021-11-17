@@ -3,7 +3,6 @@
 #include <box2d/box2d.h>
 #include "DrawPhysics.hh"
 #include "GameObject.hh"
-//#include "Projectile.hh"
 #include "DrawMap.hh"
 #include "ContactEventManager.hh"
 #include "Enemy.hh"

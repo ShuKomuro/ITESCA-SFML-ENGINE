@@ -1,7 +1,6 @@
 #pragma once
 
 #include<SFML/Graphics.hpp>
-//#include "Rigidbody.hh"
 #include "GameObject.hh"
 #include<vector>
 

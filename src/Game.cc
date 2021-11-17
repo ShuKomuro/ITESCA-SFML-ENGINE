@@ -6,6 +6,7 @@
 #include "TileGroup.hh"
 #include "InputsSystem.hh"
 #include "Enemy.hh"
+#include "Wall.hh"
 
 Collider* collider{new Collider(100, 100, 100, 100, sf::Color::Green, 5.f)};
 
@@ -15,6 +16,10 @@ float deltaTime{};
 Character* character1{};
 GameObject* chest1{};
 GameObject* chest2{};
+Wall* wall1{};
+GameObject* wall2{};
+GameObject* wall3{};
+GameObject* wall4{};
 Enemy* enemy1{};
 DrawMap* walls{};
 DrawMap* floorT{};
@@ -62,15 +67,33 @@ Game::Game()
   new sf::Vector2f(600, 500), window, world, enemySpeed);
   enemy1->SetTagName("Enemy");
 
+  wall1 = new Wall("", 0, 0, 10.f, 600.f, playerScale, 
+   new sf::Vector2f(0, 0), b2BodyType::b2_staticBody, window, world, true);
+   wall1->SetTagName("Wall");
+
+   wall2 = new Wall("", 0, 0, 10.f, 600.f, playerScale, 
+   new sf::Vector2f(416, 0), b2BodyType::b2_staticBody, window, world, true);
+   wall2->SetTagName("Wall");
+
+   wall3 = new Wall("", 0, 0, 832.f, 10.f, playerScale, 
+   new sf::Vector2f(0, 0), b2BodyType::b2_staticBody, window, world, true);
+   wall3->SetTagName("Wall");
+
+   wall4 = new Wall("", 0, 0, 832.f, 10.f, playerScale, 
+   new sf::Vector2f(0, 300), b2BodyType::b2_staticBody, window, world, true);
+   wall4->SetTagName("Wall");
+
   //tileGroup = new TileGroup(window, 10, 10, "assets/tile.png", "assets/maps/map1.tg", 16, 16, 4.f);
 
   walls = new DrawMap("assets/tilemap.png", window, 13, 9, sf::Vector2u(16, 16), wallsTiles);
   floorT = new DrawMap("assets/tilemap.png", window, 13, 9, sf::Vector2u(16, 16), floorTiles);
 
   //gameObjects->push_back(character1);
+  //gameObjects->push_back(wall1);
   gameObjects->push_back(chest1);
   gameObjects->push_back(chest2);
   gameObjects->push_back(enemy1);
+  
 
 }
 
@@ -94,10 +117,6 @@ void Game::Draw()
     gameObject->Draw();
   }
 
-  /*for(auto& enemys : *enemies)
-  {
-    enemys->Draw();
-  }*/
   world->DebugDraw();
 }
 

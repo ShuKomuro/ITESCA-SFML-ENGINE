@@ -25,8 +25,8 @@ void Bullet::Movement()
 
 void Bullet::Update(float& deltaTime)
 {
-  bulletAnimation->Play(deltaTime);
   GameObject::Update(deltaTime);
+  bulletAnimation->Play(deltaTime);
   Movement();
 }
 void Bullet::Draw()
