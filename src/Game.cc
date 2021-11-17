@@ -35,14 +35,16 @@ Game::Game()
   gravity = new b2Vec2(0.f, 0.f);
   world = new b2World(*gravity);
   drawPhysics = new DrawPhysics(window);
-  enemies = new std::vector<Enemy*>;
-  contactEventManager = new ContactEventManager();
+  //enemies = new std::vector<Enemy*>;
   
-  gameObjects = new std::vector<GameObject*>;
+  gameObjects = new std::vector<GameObject*>();
+  deleteList = new std::vector<GameObject*>();
   
+  contactEventManager = new ContactEventManager(deleteList);
+
 
   character1 = new Character("assets/sprites.png", 0, 5, 16.f, 16.f, 
-  playerScale, playerSpeed, new sf::Vector2f(100, 100), window, world);
+  playerScale, playerSpeed, new sf::Vector2f(100, 100), window, world, gameObjects);
 
   character1->SetTagName("Player");
 
@@ -65,10 +67,10 @@ Game::Game()
   walls = new DrawMap("assets/tilemap.png", window, 13, 9, sf::Vector2u(16, 16), wallsTiles);
   floorT = new DrawMap("assets/tilemap.png", window, 13, 9, sf::Vector2u(16, 16), floorTiles);
 
-  gameObjects->push_back(character1);
+  //gameObjects->push_back(character1);
   gameObjects->push_back(chest1);
   gameObjects->push_back(chest2);
-  enemies->push_back(enemy1);
+  gameObjects->push_back(enemy1);
 
 }
 
@@ -92,15 +94,22 @@ void Game::Draw()
     gameObject->Draw();
   }
 
-  for(auto& enemys : *enemies)
+  /*for(auto& enemys : *enemies)
   {
     enemys->Draw();
-  }
+  }*/
   world->DebugDraw();
 }
 
 void Game::Render()
 {
+  /*for(auto& gameObject : *deleteList)
+  {
+    //gameObjects->erase(std::remove(gameObjects->begin(), gameObjects->end(), gameObject), gameObjects->end());
+    //delete gameObject;
+  }*/
+  //deleteList->clear();
+
   window->clear(sf::Color(0, 0, 0, 255));
   Draw();
   window->display();
@@ -109,7 +118,7 @@ void Game::Init()
 {
   world->SetDebugDraw(drawPhysics);
   drawPhysics->SetFlags(b2Draw::e_shapeBit);
-  contactEventManager->setWolrd(world);
+  //contactEventManager->setWolrd(world);
   world->SetContactListener(contactEventManager);
   
   Update();
@@ -142,10 +151,10 @@ void Game::Update()
       gameObject->Update(deltaTime);
     }
 
-    for(auto& enemys : *enemies)
+    /*for(auto& enemys : *enemies)
     {
       enemys->Update(deltaTime);
-    }
+    }*/
 
     Render();
   }

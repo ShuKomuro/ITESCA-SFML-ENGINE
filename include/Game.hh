@@ -18,7 +18,8 @@ private:
     b2Draw *drawPhysics{};
     ContactEventManager* contactEventManager{};
     std::vector<GameObject *> *gameObjects;
-    std::vector<Enemy *> *enemies;
+    std::vector<GameObject *> *deleteList;
+    //std::vector<Enemy *> *enemies;
 
 public:
     Game();

@@ -1,11 +1,10 @@
 #include "ContactEventManager.hh"
-#include "GameObject.hh"
 #include<iostream>
 #include<string>
 
-ContactEventManager::ContactEventManager()
+ContactEventManager::ContactEventManager(std::vector<GameObject*>*& deleteList)
 {
-  //this->enemies = enemies;
+  this->deleteList = deleteList;
 }
 
 ContactEventManager::~ContactEventManager()
@@ -37,7 +36,7 @@ void ContactEventManager::BeginContact(b2Contact *contact)
       std::cout << "* LE DA LA BALA * xd" << std::endl;
       //enemies.erase(&actorA);
       //world->DestroyBody(contact->GetFixtureA()->GetBody());
-      
+      deleteList->push_back(actorB);
     }
     
   }
@@ -47,6 +46,6 @@ void ContactEventManager::EndContact(b2Contact *contact)
 
 }
 
-void ContactEventManager::setWolrd(b2World*& wolrd){
+/*void ContactEventManager::setWolrd(b2World*& wolrd){
   this->world = world;
-}
+}*/
