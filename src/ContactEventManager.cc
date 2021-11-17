@@ -37,6 +37,7 @@ void ContactEventManager::BeginContact(b2Contact *contact)
       //enemies.erase(&actorA);
       //world->DestroyBody(contact->GetFixtureA()->GetBody());
       deleteList->push_back(actorB);
+      
     }
     
   }
