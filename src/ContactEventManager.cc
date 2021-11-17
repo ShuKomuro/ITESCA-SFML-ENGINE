@@ -19,7 +19,7 @@ void ContactEventManager::BeginContact(b2Contact *contact)
   std::string a = actorA->GetTagName();
   std::string b = actorB->GetTagName();
 
-  if(actorA && actorB )
+  if(actorA && actorB)
   {
     if(!(a == "Player" && b == "Bullet")){
       std::cout << "c " << actorA->GetTagName() << ", " << actorB->GetTagName() << std::endl;
@@ -31,13 +31,14 @@ void ContactEventManager::BeginContact(b2Contact *contact)
       //std::cout << "* c muere * xd" << std::endl;
     }
 
-    if((a == "Enemy" && b == "Bullet") || (a == "Wall" && b == "Bullet")){
-       
+    if(a == "Wall" && b == "Bullet"){
       //std::cout << "* LE DA LA BALA * xd" << std::endl;
-      //enemies.erase(&actorA);
-      //world->DestroyBody(contact->GetFixtureA()->GetBody());
       deleteList->push_back(actorB);
-      
+    }
+
+    if(a == "Enemy" && b == "Bullet"){
+      deleteList->push_back(actorA);
+      deleteList->push_back(actorB);
     }
     
   }

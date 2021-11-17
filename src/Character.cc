@@ -17,7 +17,7 @@ GameObject(textureUrl, col, row, width, height, scale, position, b2BodyType::b2_
   gameObjects->push_back(this);
   this->position = position;
   lastAxis = sf::Vector2f(-1.0f, 0.0f);
-  CreateBullet();
+    CreateBullet();
 
   rigidbody->SetRotationFreeze(true);
 
@@ -55,6 +55,7 @@ void Character::Update(float& deltaTime)
   }
   if(InputsSystem::isPressed())
   {
+    std::cout << "se presiona"<< std::endl; 
     if(isShooting==false){
       isShooting = true;
       // std::cout << "create bullets" << std::endl;
@@ -91,9 +92,13 @@ void Character::CreateBullet()
   std::cout << "X: " << GetPosition().x << "Y :" << GetPosition().y << std::endl;
   std::cout << "world: " << world << std::endl;
   std::cout << "window: " << window << std::endl;
+  std::cout << "lastAxis X: " << lastAxis.x << "lastAxis Y: " << lastAxis.y<<std::endl;
   std::cout << "----------------------------------------------------------------" << std::endl;
   Bullet* bullet{new Bullet("assets/BulletSprites.png", 0, 12, 8.f, 8.f, 4.f, 500.f, new sf::Vector2f(GetPosition()),
   window, world, b2Vec2(lastAxis.x, lastAxis.y))};
+  std::cout << "se crea" << std::endl;
   bullet->SetTagName("Bullet");
+  std::cout << "se tagea" << std::endl;
   gameObjects->push_back(bullet);
+  std::cout << "se pushea" << std::endl;
 }

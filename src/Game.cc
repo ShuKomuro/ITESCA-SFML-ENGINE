@@ -89,7 +89,7 @@ Game::Game()
   floorT = new DrawMap("assets/tilemap.png", window, 13, 9, sf::Vector2u(16, 16), floorTiles);
 
   //gameObjects->push_back(character1);
-  //gameObjects->push_back(wall1);
+
   gameObjects->push_back(chest1);
   gameObjects->push_back(chest2);
   gameObjects->push_back(enemy1);
@@ -103,7 +103,6 @@ Game::~Game()
 
 void Game::Inputs()
 {
-
 }
 
 void Game::Draw()
@@ -111,12 +110,10 @@ void Game::Draw()
    //tileGroup->Draw();
    window->draw(*floorT);
    window->draw(*walls);
-
   for(auto& gameObject : *gameObjects)
   {
     gameObject->Draw();
   }
-
   world->DebugDraw();
 }
 
@@ -137,7 +134,6 @@ void Game::Init()
 {
   world->SetDebugDraw(drawPhysics);
   drawPhysics->SetFlags(b2Draw::e_shapeBit);
-  //contactEventManager->setWolrd(world);
   world->SetContactListener(contactEventManager);
   
   Update();
@@ -164,7 +160,6 @@ void Game::Update()
     timer->restart();
 
     UpdatePhysics();
-    
     for(auto& gameObject : *gameObjects)
     {
       gameObject->Update(deltaTime);
