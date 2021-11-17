@@ -19,6 +19,8 @@ sf::Vector2f* position, b2BodyType bodyType,sf::RenderWindow*& window, b2World*&
 
 GameObject::~GameObject()
 {
+  delete rigidbody;
+  delete drawable;
 }
 
 void GameObject::Update(float& deltaTime)

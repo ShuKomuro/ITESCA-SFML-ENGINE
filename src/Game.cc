@@ -103,12 +103,12 @@ void Game::Draw()
 
 void Game::Render()
 {
-  /*for(auto& gameObject : *deleteList)
+  for(auto& gameObject : *deleteList)
   {
-    //gameObjects->erase(std::remove(gameObjects->begin(), gameObjects->end(), gameObject), gameObjects->end());
-    //delete gameObject;
-  }*/
-  //deleteList->clear();
+    gameObjects->erase(std::remove(gameObjects->begin(), gameObjects->end(), gameObject), gameObjects->end());
+    delete gameObject;
+  }
+  deleteList->clear();
 
   window->clear(sf::Color(0, 0, 0, 255));
   Draw();
@@ -150,11 +150,6 @@ void Game::Update()
     {
       gameObject->Update(deltaTime);
     }
-
-    /*for(auto& enemys : *enemies)
-    {
-      enemys->Update(deltaTime);
-    }*/
 
     Render();
   }

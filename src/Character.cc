@@ -17,7 +17,7 @@ GameObject(textureUrl, col, row, width, height, scale, position, b2BodyType::b2_
   gameObjects->push_back(this);
   this->position = position;
   lastAxis = sf::Vector2f(1.0f, 0.0f);
-  CreateBullet();
+  //CreateBullet();
 
   rigidbody->SetRotationFreeze(true);
 
@@ -60,7 +60,7 @@ void Character::Update(float& deltaTime)
   {
     if(isShooting==false){
       isShooting = true;
-      //std::cout << "create bullets" << std::endl;
+      // std::cout << "create bullets" << std::endl;
       CreateBullet();
     }
   }
