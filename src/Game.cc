@@ -114,7 +114,7 @@ void Game::Draw()
   {
     gameObject->Draw();
   }
-  world->DebugDraw();
+  //world->DebugDraw();
 }
 
 void Game::Render()
