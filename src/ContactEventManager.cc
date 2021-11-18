@@ -29,6 +29,7 @@ void ContactEventManager::BeginContact(b2Contact *contact)
     if(a == "Player" && b == "Enemy"){
       //std::cout << "c " << actorA->GetTagName() << ", " << actorB->GetTagName() << std::endl;
       //std::cout << "* c muere * xd" << std::endl;
+      deleteList->push_back(actorA);
     }
 
     if(a == "Wall" && b == "Bullet"){
