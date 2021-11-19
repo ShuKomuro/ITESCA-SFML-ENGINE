@@ -70,4 +70,5 @@ struct InputsSystem
         axis.y = 0;
         return axis;
     }
+    
 };
