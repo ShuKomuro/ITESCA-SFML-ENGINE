@@ -104,6 +104,7 @@ void Game::Draw()
    //tileGroup->Draw();
    window->draw(*floorT);
    window->draw(*walls);
+   window->draw(*collider->GetShape());
   for(auto& gameObject : *gameObjects)
   {
     gameObject->Draw();
@@ -150,7 +151,7 @@ void Game::Update()
         window->close();
       }
     }
-    std::cout << "X: " << sf::Mouse::getPosition(*window).x << "Y: " << sf::Mouse::getPosition(*window).y << std::endl;
+    //std::cout << "X: " << sf::Mouse::getPosition(*window).x << "Y: " << sf::Mouse::getPosition(*window).y << std::endl;
     deltaTime = timer->getElapsedTime().asSeconds();
     timer->restart();
 
