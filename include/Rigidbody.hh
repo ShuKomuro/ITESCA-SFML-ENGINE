@@ -24,4 +24,5 @@ public:
   void Move(b2Vec2 direction);
   void SetRotationFreeze(bool freezeRotation);
   void SetSensor();
+  void EraseBody();
 };

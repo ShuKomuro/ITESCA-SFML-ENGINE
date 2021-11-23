@@ -1,19 +1,23 @@
 #include "Character.hh"
 #include "InputsSystem.hh"
 #include "Animation.hh"
-
+#include <stack>
+#include <iostream>
 #include "Bullet.hh"
 
 Animation* idleAnimation{new Animation()};
 Animation* runAnimation{new Animation()};
 
 Character::Character(const char* textureUrl, int col, int row, float width, float height, float scale, float moveSpeed,
-sf::Vector2f* position, sf::RenderWindow*& window, b2World*& world) :
+sf::Vector2f* position, sf::RenderWindow*& window, b2World*& world, std::vector<GameObject*>*& gameObjects) :
 GameObject(textureUrl, col, row, width, height, scale, position, b2BodyType::b2_dynamicBody, window, world)
 {
   this->moveSpeed = moveSpeed;
-  this->bullets = new std::vector<GameObject*>();
+  this->gameObjects = gameObjects;
+  gameObjects->push_back(this);
   this->position = position;
+  lastAxis = sf::Vector2f(-1.0f, 0.0f);
+    //CreateBullet();
 
   rigidbody->SetRotationFreeze(true);
 
@@ -28,21 +32,12 @@ Character::~Character()
 void Character::Draw()
 {
   GameObject::Draw();
-  for(auto& bullet : *bullets)
-  {
-    bullet->Draw();
-  }
+
 }
 
 void Character::Update(float& deltaTime)
 {
   GameObject::Update(deltaTime);
-
-  for(auto& bullet : *bullets)
-  {
-    bullet->Update(deltaTime);
-  }
-
   FlipSprite();
   Move();
 
@@ -58,11 +53,12 @@ void Character::Update(float& deltaTime)
   {
     lastAxis = InputsSystem::GetAxis();
   }
-  if(InputsSystem::isPressed() && isShooting == false)
+  if(InputsSystem::isPressed())
   {
-    isShooting = true;
-    std::cout << "create bullets" << std::endl;
-    CreateBullet();
+    if(isShooting==false){
+      isShooting = true;
+      CreateBullet();
+    }
   }
   else
   {
@@ -90,7 +86,8 @@ sf::Sprite* Character::GetSprite() const
 
 void Character::CreateBullet()
 {
-  bullets->push_back(new Bullet("assets/BulletSprites.png", 0, 8, 8.f, 8.f, 4.f, 500.f, new sf::Vector2f(GetPosition()), 
-  window, world, b2Vec2(lastAxis.x, lastAxis.y)));
+  Bullet* bullet{new Bullet("assets/BulletSprites.png", 0, 12, 8.f, 8.f, 4.f, 500.f, new sf::Vector2f(GetPosition()),
+  window, world, b2Vec2(lastAxis.x, lastAxis.y))};
+  bullet->SetTagName("Bullet");
+  gameObjects->push_back(bullet);
 }
-
