@@ -228,12 +228,11 @@ void Game::Draw()
    //tileGroup->Draw();
    window->draw(*floorT);
    window->draw(*walls);
-   window->draw(*collider->GetShape());
   for(auto& gameObject : *gameObjects)
   {
     gameObject->Draw();
   }
-  world->DebugDraw();
+  //world->DebugDraw();
 }
 
 void Game::Render()

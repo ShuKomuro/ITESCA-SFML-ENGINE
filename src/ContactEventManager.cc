@@ -33,7 +33,7 @@ void ContactEventManager::BeginContact(b2Contact *contact)
     }
 
     if(a == "Wall" && b == "Bullet"){
-      //std::cout << "* LE DA LA BALA * xd" << std::endl;
+      std::cout << "* LE DA LA BALA * xd" << std::endl;
       deleteList->push_back(actorB);
     }
 
