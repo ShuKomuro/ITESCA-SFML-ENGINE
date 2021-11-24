@@ -16,10 +16,7 @@ float deltaTime{};
 Character* character1{};
 GameObject* chest1{};
 GameObject* chest2{};
-Wall* wall1{};
-GameObject* wall2{};
 GameObject* wall3{} ;
-GameObject* wall4{};
 Enemy* enemy1{};
 DrawMap* walls{};
 DrawMap* floorT{};
@@ -52,13 +49,13 @@ Game::Game()
   
   lastPos = character1->GetPosition();
   
-  chest1 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
+  /*chest1 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
   new sf::Vector2f(350, 350), b2BodyType::b2_staticBody, window, world);
   chest1->SetTagName("chest");
 
   chest2 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
   new sf::Vector2f(448, 448), b2BodyType::b2_dynamicBody, window, world);
-  chest2->SetTagName("dynamic chest");
+  chest2->SetTagName("dynamic chest");*/
 
   enemy1 = new Enemy( "assets/sprites.png", 0, 2, 16, 16, playerScale,
   new sf::Vector2f(600, 500), window, world, enemySpeed);
@@ -75,8 +72,8 @@ Game::Game()
   walls = new DrawMap("assets/tilemap.png", window, 39, 27, sf::Vector2u(16, 16), wallsTiles);
   floorT = new DrawMap("assets/tilemap.png", window, 39, 27, sf::Vector2u(16, 16), floorTiles);
 
-  gameObjects->push_back(chest1);
-  gameObjects->push_back(chest2);
+  //gameObjects->push_back(chest1);
+  //gameObjects->push_back(chest2);
   gameObjects->push_back(enemy1);
 }
 
@@ -97,7 +94,7 @@ void Game::Draw()
   {
     gameObject->Draw();
   }
-  world->DebugDraw();
+  //world->DebugDraw();
 }
 
 void Game::Render()

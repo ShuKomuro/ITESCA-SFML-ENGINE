@@ -8,7 +8,7 @@
             "name": "(gdb) Iniciar",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/game.exe.",
+            "program": "${workspaceFolder}/bin/GoblinSlayer.exe.",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

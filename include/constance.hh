@@ -1,13 +1,13 @@
 #pragma once
 
-const int WINDOW_WIDTH{1280}; //800
+const int WINDOW_WIDTH{1280};
 const int WINDOW_HEIGHT{720};
-const char* G_NAME{"YEAH PERDONE"};
-const float playerSpeed{500.f};
+const char* G_NAME{"Goblin Slayer: Goblins Must Die!"};
+const float playerSpeed{200.f};
 const float playerScale{4.f};
 const float boxScale{2.f};
-const float enemySpeed{50.f};
-const int numWalls = 17;
+const float enemySpeed{80.f};
+const int numWalls = 28;
 
 const int wallsTiles[] =
     {
@@ -81,7 +81,11 @@ const float wallWH [numWalls][2] = {
     , {144, 176}, {192, 64}, {224, 1}
     , {128, 128}, {224, 132}, {320, 1}
     , {96, 32}, {1, 800}, {96, 112}
-    , {32, 72}, {416, 52}
+    , {32, 72}, {416, 52}, {192, 64}
+    , {96, 64}, {160, 64}, {1, 128}
+    , {96, 64}, {64, 64}, {64, 64}
+    , {32, 32}, {32, 32}, {72, 1}
+    , {32, 32}
     };
 const int wallPos [numWalls][2] = {    
     {144, 72}, {48, 584}, {328, 832}
@@ -89,5 +93,9 @@ const int wallPos [numWalls][2] = {
     , {640, 1208}, {86, 1600}, {496, 1700}
     , {888, 1536}, {680, 136}, {1168, 72}
     , {872, 342}, {1656, 448}, {1512, 224}
-    , {1608, 848}, {584, 576}
+    , {1608, 848}, {584, 576}, {920, 680}
+    , {872, 784}, {904, 1096}, {1016, 1280}
+    , {1264, 1312}, {1112, 1544}, {1512, 1544}
+    , {1224, 1592}, {1432,1592}, {1312, 1640}
+    , {1608, 1464}
     }; 
