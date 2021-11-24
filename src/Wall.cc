@@ -19,7 +19,3 @@ void Wall::Draw()
 void Wall::Update(float& deltaTime)
 {
 }
-
-/*void Wall::isWall (){
-    GameObject::isWall();
-  }*/

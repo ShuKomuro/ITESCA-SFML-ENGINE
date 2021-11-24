@@ -22,7 +22,7 @@ sf::Vector2f* position, b2BodyType bodyType,sf::RenderWindow*& window, b2World*&
   rigidbody = new Rigidbody(world, b2BodyType::b2_staticBody,
   new b2Vec2(position->x, position->y),
   width, height, 1, 0, 0,
-  b2Vec2(position->x , position->y), 0.f, (void*) this);
+  b2Vec2(width/2 , height/2), 0.f, (void*) this);
 }
 
 GameObject::~GameObject()
@@ -54,10 +54,3 @@ sf::Vector2f GameObject::GetPosition()
 {
   return rigidbody->GetPositionSFML();
 }
-
-/*void GameObject::isWall(){
-  this->rigidbody = new Rigidbody(world, b2BodyType::b2_staticBody,
-  new b2Vec2(50, 0),
-  10.f, 600.f, 1, 0, 0,
-  b2Vec2(0 , 0), 0.f, (void*) this);
-}*/
