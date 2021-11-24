@@ -75,7 +75,6 @@ Game::Game()
   walls = new DrawMap("assets/tilemap.png", window, 39, 27, sf::Vector2u(16, 16), wallsTiles);
   floorT = new DrawMap("assets/tilemap.png", window, 39, 27, sf::Vector2u(16, 16), floorTiles);
 
-  //gameObjects->push_back(character1);
   gameObjects->push_back(chest1);
   gameObjects->push_back(chest2);
   gameObjects->push_back(enemy1);

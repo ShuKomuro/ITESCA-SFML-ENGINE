@@ -3,11 +3,11 @@
 const int WINDOW_WIDTH{1280}; //800
 const int WINDOW_HEIGHT{720};
 const char* G_NAME{"YEAH PERDONE"};
-const float playerSpeed{400.f};
+const float playerSpeed{500.f};
 const float playerScale{4.f};
 const float boxScale{2.f};
 const float enemySpeed{50.f};
-const int numWalls = 7;
+const int numWalls = 17;
 
 const int wallsTiles[] =
     {
@@ -78,10 +78,16 @@ const int floorTiles[] =
 const float wallWH [numWalls][2] = {   
     {288.f, 1.f}, {96, 80}, {176, 80} 
     , {1, 960} , {96, 80}, {96, 80}
-    , { 152, 160}
+    , {144, 176}, {192, 64}, {224, 1}
+    , {128, 128}, {224, 132}, {320, 1}
+    , {96, 32}, {1, 800}, {96, 112}
+    , {32, 72}, {416, 52}
     };
 const int wallPos [numWalls][2] = {    
-    {144, 128}, {48, 584}, {328, 832}
+    {144, 72}, {48, 584}, {328, 832}
     , {0, 576} , {48, 1160}, {432, 1160}
-    , {640, 1216}
+    , {640, 1208}, {86, 1600}, {496, 1700}
+    , {888, 1536}, {680, 136}, {1168, 72}
+    , {872, 342}, {1656, 448}, {1512, 224}
+    , {1608, 848}, {584, 576}
     }; 
