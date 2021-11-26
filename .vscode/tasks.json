@@ -15,7 +15,7 @@
                 "src/rope/*.cpp",
                 "src/*.cc",
                 "-o",
-                "bin/game.exe",
+                "bin/GoblinSlayer.exe",
                 "lib/*.a"
             ],
 			"options": {

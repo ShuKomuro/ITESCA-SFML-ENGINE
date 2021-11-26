@@ -18,19 +18,31 @@ GameObject* chest1{};
 GameObject* chest2{};
 GameObject* wall3{} ;
 Enemy* enemy1{};
+Enemy* enemy2{};
+Enemy* enemy3{};
+Enemy* enemy4{};
+Enemy* enemy5{};
 DrawMap* walls{};
 DrawMap* floorT{};
 sf::Vector2f lastPos{};
 sf::View view(sf::Vector2f(0.0f,0.0f),sf::Vector2f(1280.0f,720.0f)); 
 bool isAlive = true;
-
-
+int numEnemies = 0;
+sf::Text text;
+sf::Font font; 
 TileGroup* tileGroup{};
 
 Game::Game()
 {
   window = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), G_NAME);
   event = new sf::Event();
+  font.loadFromFile("assets/Stroytime.tff");
+  text.setFont(font);
+  text.setCharacterSize(40);
+  text.setFillColor(sf::Color::White);
+  text.setStyle(sf::Text::Bold);
+  text.move(1000,0);
+  text.setString("Enemies 0/");
 
   //gravity = new b2Vec2(0.f, 9.8f);
   gravity = new b2Vec2(0.f, 0.f);
@@ -60,6 +72,22 @@ Game::Game()
   enemy1 = new Enemy( "assets/sprites.png", 0, 2, 16, 16, playerScale,
   new sf::Vector2f(600, 500), window, world, enemySpeed);
   enemy1->SetTagName("Enemy");
+  
+  enemy2 = new Enemy( "assets/sprites.png", 0, 2, 16, 16, playerScale,
+  new sf::Vector2f(1275, 300), window, world, enemySpeed);
+  enemy2->SetTagName("Enemy");
+  
+  enemy3 = new Enemy( "assets/sprites.png", 0, 2, 16, 16, playerScale,
+  new sf::Vector2f(650, 1650), window, world, enemySpeed);
+  enemy3->SetTagName("Enemy");
+
+  enemy4 = new Enemy( "assets/sprites.png", 0, 2, 16, 16, playerScale,
+  new sf::Vector2f(1350, 1200), window, world, enemySpeed);
+  enemy4->SetTagName("Enemy");
+
+  enemy5 = new Enemy( "assets/sprites.png", 0, 2, 16, 16, playerScale,
+  new sf::Vector2f(900, 950), window, world, enemySpeed);
+  enemy5->SetTagName("Enemy");
 // SE hacen tpdas las paredes
   for (int i = 0; i<numWalls; i++){
       wall3 = new Wall("", 0, 0, wallWH[i][0], wallWH[i][1], playerScale, 
@@ -75,6 +103,10 @@ Game::Game()
   //gameObjects->push_back(chest1);
   //gameObjects->push_back(chest2);
   gameObjects->push_back(enemy1);
+  gameObjects->push_back(enemy2);
+  gameObjects->push_back(enemy3);
+  gameObjects->push_back(enemy4);
+  gameObjects->push_back(enemy5);
 }
 
 Game::~Game()
@@ -94,6 +126,7 @@ void Game::Draw()
   {
     gameObject->Draw();
   }
+  window->draw(text);
   //world->DebugDraw();
 }
 

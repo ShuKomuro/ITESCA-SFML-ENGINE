@@ -3,7 +3,7 @@
 const int WINDOW_WIDTH{1280};
 const int WINDOW_HEIGHT{720};
 const char* G_NAME{"Goblin Slayer: Goblins Must Die!"};
-const float playerSpeed{200.f};
+const float playerSpeed{300.f};
 const float playerScale{4.f};
 const float boxScale{2.f};
 const float enemySpeed{80.f};
