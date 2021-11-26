@@ -16,24 +16,33 @@ float deltaTime{};
 Character* character1{};
 GameObject* chest1{};
 GameObject* chest2{};
-Wall* wall1{};
-GameObject* wall2{};
-GameObject* wall3{};
-GameObject* wall4{};
+GameObject* wall3{} ;
 Enemy* enemy1{};
+Enemy* enemy2{};
+Enemy* enemy3{};
+Enemy* enemy4{};
+Enemy* enemy5{};
 DrawMap* walls{};
 DrawMap* floorT{};
 sf::Vector2f lastPos{};
 sf::View view(sf::Vector2f(0.0f,0.0f),sf::Vector2f(1280.0f,720.0f)); 
 bool isAlive = true;
-
-
+int numEnemies = 0;
+sf::Text text;
+sf::Font font; 
 TileGroup* tileGroup{};
 
 Game::Game()
 {
   window = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), G_NAME);
   event = new sf::Event();
+  font.loadFromFile("assets/Stroytime.tff");
+  text.setFont(font);
+  text.setCharacterSize(40);
+  text.setFillColor(sf::Color::White);
+  text.setStyle(sf::Text::Bold);
+  text.move(1000,0);
+  text.setString("Enemies 0/");
 
   //gravity = new b2Vec2(0.f, 9.8f);
   gravity = new b2Vec2(0.f, 0.f);
@@ -47,48 +56,57 @@ Game::Game()
 
 
   character1 = new Character("assets/sprites.png", 0, 5, 16.f, 16.f, 
-  playerScale, playerSpeed, new sf::Vector2f(400, 300), window, world, gameObjects);
+  playerScale, playerSpeed, new sf::Vector2f(400, 250), window, world, gameObjects);
   character1->SetTagName("Player");
   
   lastPos = character1->GetPosition();
   
-  chest1 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
+  /*chest1 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
   new sf::Vector2f(350, 350), b2BodyType::b2_staticBody, window, world);
   chest1->SetTagName("chest");
 
   chest2 = new GameObject("assets/sprites.png", 6, 1, 16, 16, playerScale,
   new sf::Vector2f(448, 448), b2BodyType::b2_dynamicBody, window, world);
-  chest2->SetTagName("dynamic chest");
+  chest2->SetTagName("dynamic chest");*/
 
   enemy1 = new Enemy( "assets/sprites.png", 0, 2, 16, 16, playerScale,
   new sf::Vector2f(600, 500), window, world, enemySpeed);
   enemy1->SetTagName("Enemy");
+  
+  enemy2 = new Enemy( "assets/sprites.png", 0, 2, 16, 16, playerScale,
+  new sf::Vector2f(1275, 300), window, world, enemySpeed);
+  enemy2->SetTagName("Enemy");
+  
+  enemy3 = new Enemy( "assets/sprites.png", 0, 2, 16, 16, playerScale,
+  new sf::Vector2f(650, 1650), window, world, enemySpeed);
+  enemy3->SetTagName("Enemy");
 
-  wall1 = new Wall("", 0, 0, 10.f, 600.f, playerScale, 
-  new sf::Vector2f(0, 0), b2BodyType::b2_staticBody, window, world, true);
-  wall1->SetTagName("Wall");
+  enemy4 = new Enemy( "assets/sprites.png", 0, 2, 16, 16, playerScale,
+  new sf::Vector2f(1350, 1200), window, world, enemySpeed);
+  enemy4->SetTagName("Enemy");
 
-  wall2 = new Wall("", 0, 0, 10.f, 600.f, playerScale, 
-  new sf::Vector2f(416, 0), b2BodyType::b2_staticBody, window, world, true);
-  wall2->SetTagName("Wall");
-
-  wall3 = new Wall("", 0, 0, 832.f, 10.f, playerScale, 
-  new sf::Vector2f(0, 0), b2BodyType::b2_staticBody, window, world, true);
-  wall3->SetTagName("Wall");
-
-  wall4 = new Wall("", 0, 0, 832.f, 10.f, playerScale, 
-  new sf::Vector2f(0, 300), b2BodyType::b2_staticBody, window, world, true);
-  wall4->SetTagName("Wall");
+  enemy5 = new Enemy( "assets/sprites.png", 0, 2, 16, 16, playerScale,
+  new sf::Vector2f(900, 950), window, world, enemySpeed);
+  enemy5->SetTagName("Enemy");
+// SE hacen tpdas las paredes
+  for (int i = 0; i<numWalls; i++){
+      wall3 = new Wall("", 0, 0, wallWH[i][0], wallWH[i][1], playerScale, 
+        new sf::Vector2f(wallPos[i][0], wallPos[i][1]), b2BodyType::b2_staticBody, window, world, true);
+        wall3->SetTagName("Wall");
+  }
 
   //tileGroup = new TileGroup(window, 10, 10, "assets/tile.png", "assets/maps/map1.tg", 16, 16, 4.f);
 
   walls = new DrawMap("assets/tilemap.png", window, 39, 27, sf::Vector2u(16, 16), wallsTiles);
   floorT = new DrawMap("assets/tilemap.png", window, 39, 27, sf::Vector2u(16, 16), floorTiles);
 
-  //gameObjects->push_back(character1);
-  gameObjects->push_back(chest1);
-  gameObjects->push_back(chest2);
+  //gameObjects->push_back(chest1);
+  //gameObjects->push_back(chest2);
   gameObjects->push_back(enemy1);
+  gameObjects->push_back(enemy2);
+  gameObjects->push_back(enemy3);
+  gameObjects->push_back(enemy4);
+  gameObjects->push_back(enemy5);
 }
 
 Game::~Game()
@@ -104,12 +122,12 @@ void Game::Draw()
    //tileGroup->Draw();
    window->draw(*floorT);
    window->draw(*walls);
-   window->draw(*collider->GetShape());
   for(auto& gameObject : *gameObjects)
   {
     gameObject->Draw();
   }
-  world->DebugDraw();
+  window->draw(text);
+  //world->DebugDraw();
 }
 
 void Game::Render()
@@ -125,6 +143,7 @@ void Game::Render()
   Draw();
   window->display();
 }
+
 void Game::Init()
 {
   world->SetDebugDraw(drawPhysics);
